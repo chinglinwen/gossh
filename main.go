@@ -7,6 +7,7 @@ import (
         "io/ioutil"
         "log"
         "os"
+        "strings"
         "time"
 
         "github.com/tmc/scp"
@@ -148,7 +149,7 @@ func appendList(listfile string) error {
 
         scanner := bufio.NewScanner(file)
         for scanner.Scan() {
-                hosts = append(hosts, scanner.Text())
+                hosts = append(hosts, strings.TrimSpace(scanner.Text()))
         }
         if err := scanner.Err(); err != nil {
                 return err
