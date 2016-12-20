@@ -21,7 +21,7 @@ Usage of gossh:
 
 Examples: 
    ./gossh ip command
-   echo date | ./ssh ip
+   echo date | ./gossh ip
    ./gossh -l ip.list command
 
 Use as scp
