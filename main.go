@@ -116,7 +116,12 @@ func main() {
         for _, hostname := range hosts {
                 m := machine{hostname, port, config}
                 if scpfile != "" {
-                        scptarget := args[1]
+                        var scptarget string
+                        if listfile == "" {
+                                scptarget = args[1]
+                        } else {
+                                scptarget = args[0]
+                        }
                         go doscp(m, scpfile, scptarget, results)
                 } else {
                         go dossh(m, command, results)
