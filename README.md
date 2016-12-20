@@ -3,7 +3,7 @@ A ssh client tool written in Go
 
 Provide ssh and scp function without interactive input
 
-# Usage
+## Usage
 
 ```
 Usage of gossh:
