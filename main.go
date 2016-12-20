@@ -159,10 +159,13 @@ func appendList(listfile string) error {
 
 func doscp(m machine, src, dest string, results chan string) {
         session, err := getSession(m)
-        checkErr(err)
+        if err != nil {
+                results <- m.hostname + " scp error: " + err.Error() + "\n"
+                return
+        }
         err = scp.CopyPath(src, dest, session)
         if err != nil {
-                results <- "scp" + err.Error() + "\n"
+                results <- m.hostname + "scp error:" + err.Error() + "\n"
                 return
         }
         results <- "scp ok\n"
@@ -170,11 +173,14 @@ func doscp(m machine, src, dest string, results chan string) {
 }
 
 func dossh(m machine, cmd string, results chan string) {
+        var result string
         session, err := getSession(m)
-        checkErr(err)
+        if err != nil {
+                result = m.hostname + " error: " + err.Error()
+                return
+        }
         defer session.Close()
 
-        var result string
         out, err := session.CombinedOutput(cmd)
         if err != nil {
                 result = m.hostname + " error: " + string(out)
@@ -202,7 +208,9 @@ func getenv() {
 
 func getSession(m machine) (*ssh.Session, error) {
         conn, err := ssh.Dial("tcp", m.hostname+":"+m.port, m.config)
-        checkErr(err)
+        if err != nil {
+                return nil, err
+        }
         return conn.NewSession()
 }
 
