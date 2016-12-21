@@ -15,6 +15,8 @@ Usage of gossh:
         password
   -port string
         ssh port (default "22")
+  -t int
+        timeout for a host in second (default 10)
   -u string
         user name
   -v    show version.
