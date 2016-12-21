@@ -39,7 +39,7 @@ func do(m machine, results chan string) {
 	select {
 	case res := <-result:
 		results <- fmt.Sprintf("%v: %v", m.hostname, res)
-	case <-time.After(10 * time.Second):
+	case <-time.After(time.Duration(timeout) * time.Second):
 		results <- fmt.Sprintf("%v: timed out\n", m.hostname)
 	}
 	return
