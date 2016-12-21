@@ -45,7 +45,7 @@ func init() {
 	flag.Parse()
 
 	if *version {
-		fmt.Println("version=1.0.0, 2016-12-20")
+		fmt.Println("version=1.0.1, 2016-12-21")
 		os.Exit(1)
 	}
 
