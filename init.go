@@ -43,7 +43,7 @@ func init() {
 	flag.StringVar(&port, "port", "22", "ssh port")
 	flag.StringVar(&listfile, "l", "", "list file of hosts")
 	flag.StringVar(&scpfile, "c", "", "scp file to copy")
-	flag.IntVar(&timeout, "t", 10, "timeout for a host")
+	flag.IntVar(&timeout, "t", 10, "timeout for a host in second")
 	flag.Parse()
 
 	if *version {
