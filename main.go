@@ -10,13 +10,12 @@ import (
 func main() {
 	results := make(chan string, len(hosts))
 
-	config := &ssh.ClientConfig{
-		User: user,
-		Auth: []ssh.AuthMethod{ssh.Password(pass)},
-	}
-
-	for _, hostname := range hosts {
-		m := machine{hostname, port, config}
+	for _, x := range hosts {
+		config := &ssh.ClientConfig{
+			User: x.user,
+			Auth: []ssh.AuthMethod{ssh.Password(x.pass)},
+		}
+		m := machine{x.ip, port, config}
 		go do(m, results)
 	}
 

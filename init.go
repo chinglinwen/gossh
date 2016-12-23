@@ -9,12 +9,18 @@ import (
 	"golang.org/x/crypto/ssh"
 )
 
+type hostem struct {
+	ip   string
+	user string
+	pass string
+}
+
 var (
 	user      string
 	pass      string
 	port      string
 	host      string
-	hosts     []string
+	hosts     []hostem
 	listfile  string
 	scpfile   string
 	scptarget string
@@ -47,7 +53,7 @@ func init() {
 	flag.Parse()
 
 	if *version {
-		fmt.Println("version=1.0.1, 2016-12-21")
+		fmt.Println("version=1.0.2, 2016-12-23")
 		os.Exit(1)
 	}
 
@@ -67,7 +73,7 @@ func init() {
 	//so gossh -l ip.list command, will not append host
 	if listfile == "" {
 		host = args[0]
-		hosts = append(hosts, host)
+		hosts = append(hosts, hostem{host, user, pass})
 	}
 
 	fi, err := os.Stdin.Stat()
