@@ -13,4 +13,17 @@ Use as scp
 Environment variables:
   USER,PASS,PORT,HOST
 
+Flag specify and Environment set the global user and pass
+
+ip.list is a filename and can specify any file
+
+Format exmaple:
+ip user
+ip
+ip  user  pass
+
+If omit user or pass, using global setting
+Delimited by whitespace(or many continue whitespace)
+It can specify different password for every ip(or domain name)
+
 `
