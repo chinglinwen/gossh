@@ -27,6 +27,7 @@ var (
 
 	command string
 	timeout int
+	base    string
 )
 
 type machine struct {
@@ -50,10 +51,11 @@ func init() {
 	flag.StringVar(&listfile, "l", "", "list file of hosts")
 	flag.StringVar(&scpfile, "c", "", "scp file to copy")
 	flag.IntVar(&timeout, "t", 10, "timeout for a host in second")
+	flag.StringVar(&base, "cd", "", "cd to somewhere first")
 	flag.Parse()
 
 	if *version {
-		fmt.Println("version=1.0.2, 2016-12-23")
+		fmt.Println("version=1.0.3, 2017-1-16")
 		os.Exit(1)
 	}
 
@@ -96,9 +98,15 @@ func init() {
 		command = string(b)
 	}
 
-	if listfile == "" {
-		scptarget = args[1]
-	} else {
-		scptarget = args[0]
+	if base != "" {
+		command = "cd " + base + "\n" + command
+	}
+
+	if scpfile != "" {
+		if listfile == "" && len(args) == 2 {
+			scptarget = args[1]
+		} else if len(args) == 1 {
+			scptarget = args[0]
+		}
 	}
 }

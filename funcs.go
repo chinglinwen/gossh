@@ -36,9 +36,19 @@ func appendList(listfile string) error {
 	defer file.Close()
 
 	scanner := bufio.NewScanner(file)
-	for scanner.Scan() {
+	for i := 0; scanner.Scan(); i++ {
 		h := strings.Fields(scanner.Text())
-		x := hostem{user: user, pass: pass}
+
+		var x hostem
+		if i == 0 {
+			x.user = user
+			x.pass = pass
+		} else {
+			pre := hosts[len(hosts)-1]
+			x.user = pre.user
+			x.pass = pre.pass
+		}
+
 		switch len(h) {
 		case 1:
 			x.ip = h[0]
