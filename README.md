@@ -44,10 +44,12 @@ ip user
 ip
 ip  user  pass
 
-If omit user or pass, using global setting
+
+If omit user or pass, using global setting (for the first entry)
+For others entries ( using previous line's user and password )
+
 Delimited by whitespace(or many continue whitespace)
 It can specify different password for every ip(or domain name)
-
 ```
 
 end.
