@@ -9,6 +9,8 @@ Provide ssh and scp function without interactive input
 Usage of gossh:
   -c string
         scp file to copy
+  -cd string
+        cd to somewhere first
   -l string
         list file of hosts
   -p string
